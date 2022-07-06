@@ -25,9 +25,15 @@
     <div>
       <input type="text" placeholder="Name" v-model="add.name">
       <input type="number" placeholder="Age" v-model="add.age">
-      <button @click="addForm">submit</button>
+      <button 
+        v-if="editState"
+        @click="updateForm()">Update</button>
+      <button 
+        v-else
+        @click="addForm()">submit
+      </button>
     </div><br>
-    <table style="width:100%">
+    <table>
       <tr>
         <th>Name</th>
         <th>Age</th>
@@ -37,7 +43,7 @@
       <tr v-for="(person, i) in personal" :key="i">
         <td>{{person.name}}</td>
         <td>{{person.age}}</td>
-        <td><button>Edit</button></td>
+        <td><button @click="setUpdate(person, i)">Edit</button></td>
         <td><button @click="deleteForm(i)">Delete</button></td>
       </tr>
     </table>
@@ -86,7 +92,9 @@ export default {
         'pig',
         'cat',
         'dog'
-      ]
+      ],
+      editState: false,
+      indexBox: null
     }
   },
   watch:{
@@ -141,29 +149,46 @@ export default {
     },
     deleteForm(index){
       this.personal.splice(index, 1)
+    },
+    setUpdate(person, index){
+      this.add.name = person.name
+      this.add.age = person.age
+      this.editState = true
+      this.indexBox = index
+    },
+    updateForm(){
+      this.personal[this.indexBox] = this.add
+      this.setDefault()
+      this.editState = false
     }
   }
 }
 </script>
 
 <style scoped>
-    .center{
-      text-align: center;
-    }
-    
-    table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-  }     
+#app{
+  margin:100px;
+}
+.center{
+  text-align: center;
+}
 
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}     
 
-    tr:nth-child(even) {
-      background-color: #dddddd;
-    }
+th{
+  background-color: #FFAC9A;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #FFF3F0;
+}
 </style>
