@@ -24,7 +24,7 @@
     </div> -->
     <div>
       <input type="text" placeholder="Name" v-model="add.name">
-      <input type="text" placeholder="Age" v-model="add.age">
+      <input type="number" placeholder="Age" v-model="add.age">
       <button @click="addForm">submit</button>
     </div><br>
     <table style="width:100%">
@@ -38,7 +38,7 @@
         <td>{{person.name}}</td>
         <td>{{person.age}}</td>
         <td><button>Edit</button></td>
-        <td><button>Delete</button></td>
+        <td><button @click="deleteForm(i)">Delete</button></td>
       </tr>
     </table>
   </div>
@@ -131,8 +131,16 @@ export default {
         }
     },
     addForm(){
-      this.personal.push(this.add)
-      this.setDefault()
+      if (this.add.name == '' || this.add.age == 0) {
+        alert("Please type name and age")
+      } else {
+        this.personal.push(this.add)
+        this.setDefault()
+      }
+      // (this.add == {name:'',age:0}) ? alert("Please type name and age") : this.personal.push(this.add), this.setDefault()
+    },
+    deleteForm(index){
+      this.personal.splice(index, 1)
     }
   }
 }
