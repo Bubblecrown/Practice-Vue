@@ -34,6 +34,7 @@
 	v-else
 	@click="addForm()">submit
 	</button>
+	<button-clear @cls="onclick($event)"/>
 </div><br>
 <table>
 	<tr>
@@ -54,10 +55,10 @@
 
 <script>
 import MessageComponent from './components/MessageComponent.vue'
-
+import ButtonClear from './components/ButtonClear.vue'
 
 export default {
-components: { MessageComponent },
+components: { MessageComponent, ButtonClear},
 name: 'App',
 data (){
 return {
@@ -128,6 +129,9 @@ methods:{
 //     return this.message = ''
 //   }
 // }
+onclick(value){
+	console.log(value)
+},
 numberSign (values) {
 	return values.toLocaleString()
 },
@@ -171,7 +175,7 @@ updateForm(){
 }
 </script>
 
-<style scoped>
+<style >
 *{
 	padding:0;
 	margin:0;
@@ -188,14 +192,16 @@ updateForm(){
 	box-sizing:border-box;
 }
 
+button{
+	padding: 2px 5px 2px 5px;
+}
+
 input{
 	display: block;
 	margin:10px 0 10px 0;
 
 }
-button{
-	padding: 2px 5px 2px 5px;
-}
+
 .center{
 	text-align: center;
 }
@@ -226,3 +232,4 @@ td, th {
 background-color: #FFF3F0;
 } */
 </style>
+

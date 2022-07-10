@@ -12,15 +12,14 @@ export default {
     props: [
         'deInfo'
     ],
+    methods:{
+        
+    }
 }
 </script>
 
 <style>
-*{
-	padding:0;
-	margin:0;
-	box-sizing:border-box;
-}
+
 h1, p{
     color:#fff
 }
