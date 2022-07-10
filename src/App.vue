@@ -24,9 +24,9 @@
 	<button v-on:click="setActive">Active</button>
 </div> -->
 <div>
-	<message-component :info="detailInfo"/>
+	<message-component :de-info="detailInfo"/>
 	<input type="text" placeholder="Name" v-model="add.name">
-	<input type="number" placeholder="Age" v-model="add.age">
+	<input type="text" placeholder="Age" v-model="add.age">
 	<button 
 	v-if="editState"
 	@click="updateForm()">Update</button>
@@ -65,7 +65,7 @@ return {
 	add:
 	{
 		name:'',
-		age:0
+		age:''
 	},
 	personal: [
 	{
@@ -140,15 +140,16 @@ setActive(){
 setDefault() {
 	this.add = {
 		name:'',
-		age:0
+		age:''
 	}
 },
 addForm(){
 	if (this.add.name == '' || this.add.age == 0) {
-	alert("Please type name and age")
+		alert("Please type name and age")
 	} else {
-	this.personal.push(this.add)
-	this.setDefault()
+		this.add.age = Number(this.add.age)
+		this.personal.push(this.add)
+		this.setDefault()
 	}
 	// (this.add == {name:'',age:0}) ? alert("Please type name and age") : this.personal.push(this.add), this.setDefault()
 },
@@ -170,7 +171,7 @@ updateForm(){
 }
 </script>
 
-<style>
+<style scoped>
 *{
 	padding:0;
 	margin:0;
@@ -191,6 +192,9 @@ input{
 	display: block;
 	margin:10px 0 10px 0;
 
+}
+button{
+	padding: 2px 5px 2px 5px;
 }
 .center{
 	text-align: center;
